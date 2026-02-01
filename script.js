@@ -7,10 +7,11 @@ function parseDOB(dob) {
 }
 
 function computeD(Y, M, D) {
-  let CC = Math.floor(Y / 100);
-  let YY = Y % 100;
-  let expr = (2 * CC - 1) + 45 * YY + 1026 * (M + 1) + D;
-  return ((expr % 7) + 7) % 7;
+  const t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+  
+  let y = Y - (M < 3 ? 1 : 0);
+  let res = y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) + t[M - 1] + D;
+  return ((res % 7) + 7) % 7;
 }
 
 function getAkanName(d, gender) {
